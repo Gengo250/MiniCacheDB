@@ -1,0 +1,14 @@
+# build
+build*/
+cmake-build-*/
+
+# editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# runtime data
+data/
+*.log
