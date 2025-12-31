@@ -13,15 +13,24 @@
 ---
 
 ## O que é isso, em linguagem bem simples
-O **MiniCacheDB** é um programa que você liga e ele vira um **serviço na rede**.
 
-Ele funciona como um **caderninho digital**:
+O **MiniCacheDB** é um **mini banco de dados em rede** (um “mini Redis”) feito em **C++**.
 
-- você manda **comandos por rede** (mesmo no seu PC ou de outro computador),
-- ele **guarda** pares do tipo `chave -> valor` na memória (RAM),
-- e salva um “diário” em arquivo (**AOF**) para recuperar os dados quando o servidor reinicia.
+Na prática, você liga o programa e ele vira um **servidor TCP** escutando uma porta (ex.: `6379`).  
+Qualquer cliente na mesma máquina ou na mesma rede (Linux/Windows) pode se conectar e enviar comandos.
 
-👉 É a mesma ideia do Redis (em miniatura), feita do zero para portfólio.
+Ele funciona como um **armazenamento chave-valor**:
+
+- **SET**: salva um dado (`chave -> valor`)
+- **GET**: busca o dado pela chave
+- **DEL**: remove o dado
+- **EX (TTL)**: define tempo de expiração opcional (ex.: `SET token abc EX 10`)
+
+Além de guardar tudo na **memória (RAM)** para ser rápido, ele também grava um **log de persistência (AOF)** em arquivo (`data/aof.log`).  
+Isso permite **reiniciar o servidor** e ele **reconstruir o estado** lendo o histórico do log (replay no boot).
+
+✅ Resumo: é um **mini banco/cachê** que você controla por comandos via rede, com **testes**, **concorrência (thread pool)** e **persistência** para mostrar habilidades reais de back-end/sistemas.
+
 
 ---
 
